@@ -22,7 +22,6 @@ import androidx.core.view.isVisible
 import kotlinx.android.synthetic.main.activity_main.*
 import java.lang.StringBuilder
 
-
 private const val MEDIUM_TAG = "com.medium.reader"
 class MainActivity : AppCompatActivity() {
 
@@ -76,6 +75,7 @@ class MainActivity : AppCompatActivity() {
                 request?.let {
                     val url = it.url.toString()
                     return if(url.startsWith("medium")) {
+                        error_scene.isVisible = false
                         progress_circular.isVisible = true
                         true
                     } else {
@@ -89,6 +89,11 @@ class MainActivity : AppCompatActivity() {
 
             override fun onPageStarted(view: WebView?, url: String?, favicon: Bitmap?) {
                 progress_circular.isVisible = true
+            }
+
+            override fun onReceivedError(view: WebView?, request: WebResourceRequest?, error: WebResourceError?) {
+                webview.isVisible = false
+                error_scene.isVisible = true
             }
         }
     }
@@ -124,6 +129,7 @@ class MainActivity : AppCompatActivity() {
     private fun loadUrl(link: String) {
         webview.clearCache(true)
         clearCookies()
+        error_scene.isVisible = false
         webview.loadUrl(link)
     }
 
