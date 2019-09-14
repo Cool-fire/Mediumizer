@@ -1,4 +1,4 @@
 <resources>
     <string name="app_name">Mediumizer</string>
-    <string name="error_message">Oops Something went wrong...</string>
+    <string name="error_message">Oops Something Went Wrong…</string>
 </resources>
