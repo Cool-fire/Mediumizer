@@ -592,13 +592,13 @@ public class IntroActivity extends AppCompatActivity implements IntroNavigation 
         if (buttonCtaVisible) {
             if (buttonCtaLabelRes != 0) {
                 return Pair.create((CharSequence) getString(buttonCtaLabelRes),
-                        new ButtonCtaClickListener());
+                        this.buttonCtaClickListener);
             }
             if (!TextUtils.isEmpty(buttonCtaLabel)) {
-                return Pair.create(buttonCtaLabel, new ButtonCtaClickListener());
+                return Pair.create(buttonCtaLabel, this.buttonCtaClickListener);
             } else {
                 return Pair.create((CharSequence) getString(R.string.mi_label_button_cta),
-                        new ButtonCtaClickListener());
+                        this.buttonCtaClickListener);
             }
         }
         return null;

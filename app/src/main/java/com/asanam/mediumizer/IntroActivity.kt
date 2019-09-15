@@ -29,8 +29,7 @@ class MainIntroActivity : IntroActivity(){
             .valueOf("Go to Medium")
         label.setSpan(labelSpan, 0, label.length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
         buttonCtaLabel = label
-        buttonCtaClickListener = View.OnClickListener {
-            Toast.makeText(it.context, "DOne", Toast.LENGTH_SHORT).show()
+        setButtonCtaClickListener {
             openMediumApp()
         }
 
@@ -72,17 +71,16 @@ class MainIntroActivity : IntroActivity(){
                 .canGoForward(false)
                 .build()
         )
+        autoplay(3000, INFINITE)
     }
 
     private fun openMediumApp() {
-        val intent = applicationContext.packageManager.getLaunchIntentForPackage(MEDIUM_TAG)
+        var intent = applicationContext.packageManager.getLaunchIntentForPackage(MEDIUM_TAG)
         if (intent == null) {
-            // Bring user to the market or let them choose an app?
-            val intent = Intent(Intent.ACTION_VIEW);
-            intent.data = Uri.parse("market://details?id=$packageName");
-        } else {
-            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-            applicationContext.startActivity(intent)
+            intent = Intent(Intent.ACTION_VIEW)
+            intent.data = Uri.parse("market://details?id=$MEDIUM_TAG")
         }
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+        applicationContext.startActivity(intent)
     }
 }
