@@ -41,8 +41,8 @@ class MainIntroActivity : IntroActivity(){
         addSlide(
             SimpleSlide.Builder()
                 .title("open Medium")
-                .description("open medium")
-                .image(R.drawable.not_found)
+                .description("Open Medium and select the articles which you want to read.")
+                .image(R.drawable.splash)
                 .background(android.R.color.white)
                 .backgroundDark(android.R.color.background_dark)
                 .layout(R.layout.intro_slide)
@@ -51,9 +51,9 @@ class MainIntroActivity : IntroActivity(){
 
         addSlide(
             SimpleSlide.Builder()
-                .title("open Medium")
-                .description("open medium")
-                .image(R.drawable.not_found)
+                .title("Select The Article")
+                .description("select the Article which you want to read and click on it.")
+                .image(R.drawable.article)
                 .background(android.R.color.white)
                 .backgroundDark(android.R.color.background_dark)
                 .layout(R.layout.intro_slide)
@@ -62,16 +62,27 @@ class MainIntroActivity : IntroActivity(){
 
         addSlide(
             SimpleSlide.Builder()
-                .title("open Medium")
-                .description("open medium")
-                .image(R.drawable.not_found)
+                .title("Share the article to Mediumizer")
+                .description("After selecting the article share it to Mediumizer to read the premium article for free ")
+                .image(R.drawable.share)
+                .background(android.R.color.white)
+                .backgroundDark(android.R.color.background_dark)
+                .layout(R.layout.intro_slide)
+                .build()
+        )
+
+        addSlide(
+            SimpleSlide.Builder()
+                .title("Read full article in Mediumizer")
+                .description("After sharing the article, Mediumizer opens the whole article to read without any restrictions. No Need to upgrade your membership in Medium.")
+                .image(R.drawable.full_article)
                 .background(android.R.color.white)
                 .backgroundDark(android.R.color.background_dark)
                 .layout(R.layout.intro_slide)
                 .canGoForward(false)
                 .build()
         )
-        autoplay(3000, INFINITE)
+        autoplay(2500, INFINITE)
     }
 
     private fun openMediumApp() {
