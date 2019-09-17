@@ -1,11 +1,8 @@
 package com.asanam.mediumizer
 
 import android.annotation.SuppressLint
-import android.content.Context
 import android.content.Intent
-import android.content.SharedPreferences
 import android.graphics.Bitmap
-import android.graphics.Color
 import android.net.Uri
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
@@ -13,14 +10,12 @@ import android.os.Bundle
 import android.os.PersistableBundle
 import android.widget.Toast
 import androidx.annotation.RequiresApi
-import java.nio.file.Files.size
 import android.util.Patterns
 import android.view.View
 import android.webkit.*
-import androidx.browser.customtabs.CustomTabsIntent
 import androidx.core.view.isVisible
+import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.activity_main.*
-import java.lang.StringBuilder
 
 private const val MEDIUM_TAG = "com.medium.reader"
 class MainActivity : AppCompatActivity() {
@@ -53,6 +48,8 @@ class MainActivity : AppCompatActivity() {
         webview.settings.javaScriptEnabled = true
         webview.settings.cacheMode = WebSettings.LOAD_NO_CACHE
         webview.setLayerType(View.LAYER_TYPE_HARDWARE, null)
+        webview.settings.builtInZoomControls = true
+        webview.settings.displayZoomControls = false
         webview.clearCache(true)
         setwebViewClient()
         setwebChromeClient()
@@ -94,6 +91,7 @@ class MainActivity : AppCompatActivity() {
             override fun onReceivedError(view: WebView?, request: WebResourceRequest?, error: WebResourceError?) {
                 webview.isVisible = false
                 error_scene.isVisible = true
+                progress_circular.isVisible = false
             }
         }
     }
@@ -115,21 +113,46 @@ class MainActivity : AppCompatActivity() {
             intent.getStringExtra(Intent.EXTRA_TEXT)?.let { text ->
                 val links = extractLinks(text)
                 if(links.size == 0) {
-                    makeToast("No Links found")
+                    makeSnackBar("No links Found")
+                    showErrorPage()
                 } else {
                     link = links[0]
                     loadUrl(link)
                 }
             }
         } else {
-            makeToast("Not supported")
+            makeSnackBar("Other apps are not Supported")
+            showErrorPage()
         }
+    }
+
+    private fun showErrorPage() {
+        progress_circular.isVisible = false
+        webview.isVisible = false
+        error_scene.isVisible = true
+    }
+
+    private fun makeSnackBar(text: String) {
+        Snackbar.make(constraint,text,Snackbar.LENGTH_LONG).setAction("open medium") {
+            openMediumApp()
+        }.setActionTextColor(resources.getColor(R.color.colorAccent)).show()
+    }
+
+    private fun openMediumApp() {
+        var intent = applicationContext.packageManager.getLaunchIntentForPackage(MEDIUM_TAG)
+        if (intent == null) {
+            intent = Intent(Intent.ACTION_VIEW)
+            intent.data = Uri.parse("market://details?id=$MEDIUM_TAG")
+        }
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+        applicationContext.startActivity(intent)
     }
 
     private fun loadUrl(link: String) {
         webview.clearCache(true)
         clearCookies()
         error_scene.isVisible = false
+        webview.isVisible = true
         webview.loadUrl(link)
     }
 
@@ -137,10 +160,6 @@ class MainActivity : AppCompatActivity() {
         val cookieManager = CookieManager.getInstance()
         cookieManager.removeAllCookies(null)
         cookieManager.flush()
-    }
-
-    private fun makeToast(s: String) {
-        Toast.makeText(this, s, Toast.LENGTH_SHORT).show()
     }
 
     private fun extractLinks(text: String): ArrayList<String> {

@@ -42,4 +42,6 @@ dependencies {
     implementation 'agency.tango.android:material-intro-screen:0.0.5'
     implementation project(':library')
 
+    implementation 'com.google.android.material:material:1.1.0-alpha10'
+
 }
