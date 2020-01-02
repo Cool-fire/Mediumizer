@@ -9,6 +9,8 @@ Mediumizer - A Simple android app to view medium premium articles for free
 <p align="center">
   <a href="https://opensource.org/licenses/MIT">
     <img src="https://img.shields.io/badge/License-MIT-brightgreen.svg" alt="License MIT">
+    <img src="https://img.shields.io/badge/language-kotlin-orange" alt="language:Kotlin">
+    <img src="https://img.shields.io/badge/os-android-success" alt="os:android"
   </a>
 </p>
 
@@ -36,6 +38,8 @@ Available in Play Store
   <li> View the Premium Article for free in Mediumizer </li>
 </ul>
 
+## Thanks 
+- [heinrichreimer](https://github.com/heinrichreimer) for his [Awesome Material Intro Library](https://github.com/heinrichreimer/material-intro)
 
 
 ## License
