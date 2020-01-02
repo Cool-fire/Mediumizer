@@ -3,7 +3,7 @@
   <img src="app/src/main/res/mipmap-xxxhdpi/ic_launcher.png" alt="Mediumizer">
 <br>
 <br>
-Mediumizer
+Mediumizer - A Simple android app to view medium premium articles for free
 </h1>
 
 <p align="center">
@@ -22,9 +22,19 @@ Available in Play Store
 
 ## Screenshots
 
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/25877454/71652656-06522580-2d4d-11ea-87ad-3ddceb14aea2.jpg" width = "270" height="540" alt="Home">
+  <img src="https://user-images.githubusercontent.com/25877454/71652741-9abc8800-2d4d-11ea-95dc-7b9dab511d69.jpg" width="270" height="540" alt="Sharing">
+</p>
 
 
-## Thanks
+
+## Steps
+<ul>
+  <li> Open Medium Premium Article in Medium App </li>
+  <li> Share the Premium Article to Mediumizer </li>
+  <li> View the Premium Article for free in Mediumizer </li>
+</ul>
 
 
 
